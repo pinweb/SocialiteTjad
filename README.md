@@ -1,7 +1,7 @@
 ## Installation
 
 ```bash
-composer require socialiteproviders/twitter
+composer require pinweb/socialite-tjad
 ```
 
 ## Add provider event listener
