@@ -1,6 +1,10 @@
 {
     "name": "pinweb/socialite-tjad",
     "description": "Tjad OAuth2 Provider for Laravel Socialite",
+    "require": {
+        "php": ">=5.5.9",
+        "socialiteproviders/manager": "~2.0 || ~3.0 || ~4.0"
+    },
     "license": "MIT",
     "authors": [
         {
@@ -8,10 +12,6 @@
             "email": "atan@pinweb.io"
         }
     ],
-    "require": {
-        "php": ">=5.5.9",
-        "socialiteproviders/manager": "~2.0 || ~3.0"
-    },
     "autoload": {
         "psr-4": {
             "SocialiteProviders\\Tjad\\": ""
