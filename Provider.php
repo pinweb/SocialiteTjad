@@ -22,6 +22,11 @@ class Provider extends AbstractProvider
         return $this->getConfig('passport_url');
     }
 
+    public static function additionalConfigKeys()
+    {
+        return ['passport_url'];
+    }
+
     /**
      * {@inheritdoc}
      */
