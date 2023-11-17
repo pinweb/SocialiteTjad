@@ -26,7 +26,8 @@ Add configuration to `config/services.php`
 'tjad' => [
     'client_id' => env('CLIENT_ID'),
     'client_secret' => env('CLIENT_SECRET'),
-    'redirect' => env('REDIRECT')
+    'redirect' => env('REDIRECT'),
+    'passport_url' => env('PASSPORT_URL')
 ],
 ```
 

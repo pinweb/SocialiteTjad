@@ -17,14 +17,17 @@ class Provider extends AbstractProvider
      */
     protected $scopes = [];
 
-    public $passport_url = 'http://reg.tjad.cn';
+    protected function getPassportUrl()
+    {
+        return $this->getConfig('passport_url');
+    }
 
     /**
      * {@inheritdoc}
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase($this->passport_url . '/oauth/authorize', $state);
+        return $this->buildAuthUrlFromBase($this->getPassportUrl().'/oauth/authorize', $state);
     }
 
     /**
@@ -32,7 +35,7 @@ class Provider extends AbstractProvider
      */
     protected function getTokenUrl()
     {
-        return $this->passport_url . '/oauth/token';
+        return $this->getPassportUrl().'/oauth/token';
     }
 
     /**
@@ -40,11 +43,12 @@ class Provider extends AbstractProvider
      */
     protected function getUserByToken($token)
     {
-        $response = $this->getHttpClient()->get($this->passport_url . '/api/user', [
+        $response = $this->getHttpClient()->get($this->getPassportUrl().'/api/user', [
             'headers' => [
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
             ],
         ]);
+
         return json_decode($response->getBody(), true);
     }
 
@@ -54,11 +58,11 @@ class Provider extends AbstractProvider
     protected function mapUserToObject(array $user)
     {
         return (new User())->setRaw($user)->map([
-            'id'       => $user['id'],
+            'id' => $user['id'],
             'nickname' => $user['username'],
-            'name'     => $user['name'],
-            'email'    => $user['email'],
-            'avatar'   => $user['avatar'],
+            'name' => $user['name'],
+            'email' => $user['email'],
+            'avatar' => $user['avatar'],
         ]);
     }
 
@@ -68,7 +72,7 @@ class Provider extends AbstractProvider
     protected function getTokenFields($code)
     {
         return array_merge(parent::getTokenFields($code), [
-            'grant_type' => 'authorization_code'
+            'grant_type' => 'authorization_code',
         ]);
     }
 }
